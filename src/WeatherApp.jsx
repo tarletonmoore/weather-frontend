@@ -3,6 +3,8 @@ import axios from 'axios';
 import rain from './assets/rain.jpg'
 import sunny from './assets/sunny.jpeg'
 import cloudy from './assets/cloudy.png'
+import Card from 'react-bootstrap/Card';
+import Button from "react-bootstrap/Button";
 
 const WeatherApp = () => {
 
@@ -62,22 +64,37 @@ const WeatherApp = () => {
 
   return (
     <div>
-      <h1>Weather App</h1>
-      <input type="text" placeholder="Enter city name" onChange={handleInputChange} />
-      <button onClick={handleSearch}>Search</button>
+      <Card style={{ marginLeft: "10px", backgroundColor: "darkgray" }}>
 
-      {weatherData && (
-        <div>
-          <h2>{weatherData.name}, {weatherData.sys.country}</h2>
-          <p>Temperature: {kelvinToFahrenheit(weatherData.main.temp).toFixed(2)} °F {kelvinToCelsius(weatherData.main.temp).toFixed(2)} °C</p>
-          <p>Weather: {weatherData.weather[0].description}</p>
-          <p>Min Temperature: {kelvinToFahrenheit(weatherData.main.temp_min).toFixed(2)} °F {kelvinToCelsius(weatherData.main.temp_min).toFixed(2)} °C</p>
-          <p>Max Temperature: {kelvinToFahrenheit(weatherData.main.temp_max).toFixed(2)} °F {kelvinToCelsius(weatherData.main.temp_max).toFixed(2)} °C</p>
-          {weatherImage && <img src={weatherImage} alt="Weather Condition" width="200px" />}
+        <h1 style={{ marginLeft: "10px" }}>Weather App</h1>
+        <div style={{ marginLeft: "10px" }}>
+          <input
+            type="text"
+            placeholder="Enter city name"
+            onChange={handleInputChange}
+            style={{ width: "30%", marginRight: "1%" }}
+          />
+          <Button onClick={handleSearch} style={{ width: "10%" }}>Search</Button>
         </div>
-      )}
 
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+
+        <Card.Body style={{ marginLeft: "10px" }}>
+          {weatherData && (
+            <div>
+              <h2>{weatherData.name}, {weatherData.sys.country}</h2>
+              <p>Temperature: {kelvinToFahrenheit(weatherData.main.temp).toFixed(2)} °F {kelvinToCelsius(weatherData.main.temp).toFixed(2)} °C</p>
+              <p>Weather: {weatherData.weather[0].description}</p>
+              <p>Min Temperature: {kelvinToFahrenheit(weatherData.main.temp_min).toFixed(2)} °F {kelvinToCelsius(weatherData.main.temp_min).toFixed(2)} °C</p>
+              <p>Max Temperature: {kelvinToFahrenheit(weatherData.main.temp_max).toFixed(2)} °F {kelvinToCelsius(weatherData.main.temp_max).toFixed(2)} °C</p>
+              <Card.Img
+                src={weatherImage} alt="Weather Condition" style={{ width: "200px" }}
+              />
+            </div>
+          )}
+
+          {error && <p style={{ color: 'red' }}>{error}</p>}
+        </Card.Body>
+      </Card>
     </div>
   );
 };
